@@ -18,7 +18,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 cv = CountVectorizer(max_features = 1500)
 print(cv)
 corpus=pd.read_csv('corpus_dataset.csv')
-corpus1=corpus['tweets'].tolist()
+corpus1=corpus['text'].tolist()
 X = cv.fit_transform(corpus1).toarray()
 
 
@@ -46,11 +46,11 @@ def predict():
     '''
     For rendering results on HTML GUI
     '''
-    tweets = request.args.get('tweets')
+    text = request.args.get('text')
     
-    tweets=[tweets]
+    text=[text]
 
-    input_data = cv.transform(tweets).toarray()
+    input_data = cv.transform(text).toarray()
 
     #prediction = model.predict(input_data)
 
@@ -64,12 +64,6 @@ def predict():
       prediction = model.predict(input_data)
       
     elif Model=="KNN Classifer":
-      prediction = model1.predict(input_data)
-
-    elif Model=="SVM Classifer":
-      prediction = model.predict(input_data)
-
-    elif Model=="Kernel SVM CLassifer":
       prediction = model1.predict(input_data)
 
     elif Model=="RANdom Forest Classifer":
